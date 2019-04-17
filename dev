@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --rm -it -p 8080:8080 --name vuejs -v /Users/tranvanmy/Projects/sample-vue:/opt/app mytv77/vuejs npm run dev
