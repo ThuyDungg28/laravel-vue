@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueAxios from 'vue-axios'
+import axios from './backend/axios/axios'
 
 Vue.config.productionTip = false
 
@@ -13,3 +15,6 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+Vue.use(VueAxios, axios)
+Vue.prototype.$axios = axios
