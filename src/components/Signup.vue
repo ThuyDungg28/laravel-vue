@@ -1,54 +1,62 @@
 <template>
-    <div>
-        <div class="alert alert-danger" v-if="error && !success">
-            <p>There was an error, unable to complete registration.</p>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="btn btn-danger">Register User</h1>
+                    <form action="" method="post" v-on:submit.prevent="signup">
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Full Name</td>
+                                    <td><input type="text" name="name" v-model="name" class="form-control" placeholder="Enter name"></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><input type="email" name="email" v-model="email" class="form-control" placeholder="Enter email"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td><input type="password" name="pass" v-model="pass" class="form-control" placeholder="Enter password"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center"><button class="btn btn-warning">Register</button>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="alert alert-success" v-if="success">
-            <p>Registration completed. You can now <router-link :to="{name:'login'}">sign in.</router-link></p>
-        </div>
-        <form autocomplete="off" @submit.prevent="signup" v-if="!success" method="post">
-            <div class="form-group" v-bind:class="{ 'has-error': error && errors.name }">
-                <label for="name">Name</label>
-                <input type="text" id="name" class="form-control" v-model="name" required>
-                <span class="help-block" v-if="error && errors.name">{{ errors.name }}</span>
-            </div>
-            <div class="form-group" v-bind:class="{ 'has-error': error && errors.email }">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
-                <span class="help-block" v-if="error && errors.email">{{ errors.email }}</span>
-            </div>
-            <div class="form-group" v-bind:class="{ 'has-error': error && errors.password }">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" v-model="password" required>
-                <span class="help-block" v-if="error && errors.password">{{ errors.password }}</span>
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        <div class="col-md-4"></div>
     </div>
 </template>
-<!-- <script>
-export default {
-  name: 'Login',
-  data: function () {
-    return {
-      error: '',
-      email: '',
-      password: ''
+<script>
+    export default{
+      name: 'Signup',
+        data(){
+            return{
+                name: '',
+                email: '',
+                password: ''
+            }
+        },
+        methods:{
+            signup: function() {
+              this.$axios.post('http://localhost:2020/api/auth/signup', {
+                  name: this.name,
+                  email: this.email,
+                  password: this.password
+                })
+                .then((response) => {
+                    alert('success')
+                });
+            }
+        }
     }
-  },
-  created: function () {
-    this.getAbc()
-  },
-  methods: {
-    login: function () {
-    },
-    getAbc: function () {
-      console.log(this.axios);
-      this.$axios.get('abc')
-        .then((response) => {
-          alert(response)
-        })
-    }
-  }
-}
-</script> -->
+</script>
